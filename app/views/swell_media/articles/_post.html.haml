@@ -9,13 +9,13 @@
 				= article.title
 		.entry-meta
 			%span.author
-				%a{ href: swell_media.category_path( :all, user: article.user.slug) }
+				%a{ href: swell_media.articles_path( by: article.user.slug) }
 					by #{article.user.full_name}
 			%span.date
 				on #{article.publish_at.strftime("%B %e %Y")}
 			%span.category
 				In
-				%a{ href: swell_media.category_path(article.category.slug) }
+				%a{ href: swell_media.articles_path(category: article.category.slug) }
 					= article.category.name
 	%p
 		= raw article.description

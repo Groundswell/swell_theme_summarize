@@ -14,12 +14,11 @@
 					by
 					%a{:href => swell_media.articles_path( by: article.user.slug )}=article.user.full_name
 				%span.entry-date
-					%a{:href => "blog.html"}
-						on
-						%time{:datetime => article.publish_at.to_formatted_s(:iso8601) }=article.publish_at.strftime("%B %e %Y")
+					on
+					%time{:datetime => article.publish_at.to_formatted_s(:iso8601) }=article.publish_at.strftime("%B %e %Y")
 				%span.category
 					In
-					%a{:href => swell_media.category_path(article.category.slug)}=article.category.name
+					%a{:href => swell_media.articles_path(category: article.category.slug)}=article.category.name
 		%p
 			= article.sanitized_content.truncate(200)
 			%a.more-link{:href => article.url}

@@ -20,7 +20,7 @@
 								%time{:datetime => featured_article.publish_at.strftime("%B %e %Y")}=featured_article.publish_at.strftime("%B %e %Y")
 							%span.category
 								In
-								%a{:href => swell_media.category_path(featured_article.category.slug)}=featured_article.category.name
+								%a{:href => swell_media.articles_path(category: featured_article.category.slug)}=featured_article.category.name
 / /.widget
 -# %aside#reviewCarousel.widget.carousel.slide
 	%h2.widget-title.ribbon
@@ -204,6 +204,6 @@
 		%span Tags
 	.tagcloud
 		- SwellMedia::Article.published.media_tag_cloud( limit: 16 ).each do |tag,count|
-			%a{:href => swell_media.category_path( :all, tag: tag ) }
+			%a{:href => swell_media.articles_path( tagged: tag ) }
 				= tag
 / /.widget

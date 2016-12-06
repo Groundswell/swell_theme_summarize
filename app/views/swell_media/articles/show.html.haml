@@ -32,8 +32,10 @@
 				%li
 					%a{:href => swell_media.root_path()} Home
 				%li
-					%a{:href => swell_media.category_path( @media.category.slug ) }=@media.category.name
-				%li.active{:title => @media.title}=@media.title.truncate(32)
+					%a{:href => swell_media.articles_path() } Blog
+				%li.active
+					%a{:href => swell_media.articles_path(category: @media.category.slug ) }=@media.category.name
+				-# %li.active{:title => @media.title}=@media.title.truncate(32)
 		%header.page-header
 			-# .page-meta.pull-right.hidden-xs
 				%a{:href => "#comments"}
@@ -53,14 +55,14 @@
 			.entry-meta.indented
 				%span.author
 					by
-					%a{:href => swell_media.category_path( :all, user: @media.user.slug) }=@media.user.full_name
+					%a{:href => swell_media.articles_path(by: @media.user.slug) }=@media.user.full_name
 				%span.entry-date
 					on
 					%time{:datetime => "2013-07-04T23:26:34+00:00"}=@media.publish_at.strftime("%B %e %Y")
 				- if @media.category.present?
 					%span.category
 						In
-						%a{:href => swell_media.category_path( @media.category.slug ) }=@media.category.name
+						%a{:href => swell_media.articles_path(category: @media.category.slug ) }=@media.category.name
 			.entry-content.indented
 				= raw @media.content
 		.after-entry.indented
@@ -70,7 +72,7 @@
 					%i.icon-tags
 					Tags:
 					- @media.tags.each do |tag|
-						%a{:href => swell_media.category_path( :all, tag: tag )}=tag
+						%a{:href => swell_media.articles_path( tagged: tag )}=tag
 			%hr/
 			%aside.widget.widget-author.media
 				%figure.entry-author-avatar.media-object.avatar.pull-left
@@ -82,7 +84,7 @@
 				.media-body
 					%h4.entry-author-name
 						By
-						%a{:href => swell_media.category_path(:all, user: @media.user.slug) }=@media.user.full_name
+						%a{:href => swell_media.articles_path(by: @media.user.slug) }=@media.user.full_name
 					- if @media.user.short_bio.present?
 						%p
 							= @media.user.short_bio

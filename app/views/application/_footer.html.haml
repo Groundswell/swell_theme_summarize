@@ -6,7 +6,7 @@
 				%ul.entries.links.links-2-cols
 					- SwellMedia::Category.order(name: :asc).limit(8).each do |category|
 						%li
-							%a{:href => swell_media.category_path(category.slug)}=category.name
+							%a{:href => swell_media.articles_path(category: category.slug)}=category.name
 			/ /.col-3
 			.clearfix.visible-xs
 			.widget.col-xs-6.col-sm-2

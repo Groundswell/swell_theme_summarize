@@ -105,8 +105,14 @@
 			%ol.breadcrumb.ribbon-inner
 				%li
 					%a{:href => swell_media.root_path()} Home
-				%li.active
-					Blog
+				- if @category.present?
+					%li
+						%a{:href => swell_media.articles_path()} Blog
+					%li.active
+						= @title
+				- else
+					%li.active
+						= @title
 		.entries
 			- @articles.each do |article|
 				= render 'swell_media/articles/row', article: article, args: {}
