@@ -1,0 +1,81 @@
+%footer#footer.footer-area
+	.footer-top.container
+		.row
+			.widget.col-xs-12.col-sm-4
+				%h4.widget-title Categories
+				%ul.entries.links.links-2-cols
+					- SwellMedia::Category.order(name: :asc).limit(8).each do |category|
+						%li
+							%a{:href => swell_media.category_path(category.slug)}=category.name
+			/ /.col-3
+			.clearfix.visible-xs
+			.widget.col-xs-6.col-sm-2
+				%h4.widget-title Information
+				%ul.entries.links.links
+					- if current_user.present?
+						%li
+							Hi
+							= "#{current_user}!"
+						%li
+							= link_to 'Admin', '/admin'
+						%li
+							= link_to 'Logout', '/logout'
+					%li
+						%a{:href => '/about'} About
+					%li
+						%a{:href => swell_media.new_contact_path()} Contact
+					- unless current_user.present?
+						%li
+							= link_to 'Admin', '/login'
+			/ /.col-3
+			-# .widget.col-xs-6.col-sm-2
+				%h4.widget-title Follow Us
+				%ul.entries.links
+					%li
+						%a{:href => "blog.html"}
+							%i.icon-facebook-sign.icon-2x
+							Facebook
+					%li
+						%a{:href => "blog.html"}
+							%i.icon-twitter-sign.icon-2x
+							Twitter
+					%li
+						%a{:href => "blog.html"}
+							%i.icon-google-plus-sign.icon-2x
+							Google Plus
+					%li
+						%a{:href => "blog.html"}
+							%i.icon-linkedin-sign.icon-2x
+							Linkedin
+			/ /.col-3
+			.clearfix.visible-xs
+			.widget.col-xs-12.col-sm-4
+				%h4.widget-title Subscribe
+
+				= form_for SwellMedia::Contact.new, url: swell_media.contacts_path(), html: { class: 'form-horizontal' } do |f|
+					= f.hidden_field :subject, value: 'OptIn'
+					= f.hidden_field :message, message: 'OptIn'
+					.form-group
+						%label.col-lg-2.control-label{:for => "subscribeEmail"} EMAIL
+						.col-lg-10
+							= f.email_field :email, id: '#subscribeEmail', class: 'form-control', :placeholder => "Your Email"
+					.form-group
+						%label.col-lg-2.control-label RSS
+						.col-lg-10
+							%p.form-control-static
+								%a{:href => swell_media.category_url( :all, format: 'rss' )}
+									%i.fa.fa-rss
+									Posts
+								   
+								%a{:href => "http://cloud.feedly.com/#subscription%2Ffeed%2F#{CGI.escape( swell_media.category_url( :all, format: 'rss' ) )}", :target => "blank" }
+									%img#feedlyFollow{:alt => "follow us in feedly", :src => "http://s3.feedly.com/img/follows/feedly-follow-logo-black_2x.png", style: 'height: 1.25em;vertical-align: text-top;opacity: 0.4;'}
+									Feedly
+			/ /.col-3
+		/ row.
+	.footer-bottom
+		.container.aligncenter
+			%p
+				©
+				= Time.now.year
+				= SwellMedia.app_name
+				All rights reserved.

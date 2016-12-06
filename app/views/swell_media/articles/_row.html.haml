@@ -1,0 +1,27 @@
+%article.entry.style-media.media.type-post
+	%figure.media-object.pull-left.entry-thumbnail.hidden-xs
+		/ to disable lazy loading, remove data-src and data-src-retina
+		%img{:alt => "", "data-src" => article.avatar, "data-src-retina" => article.avatar, :height => "230", :src => image_path('app_theme/placeholder.gif'), :width => "230"}/
+		/ fallback for no javascript browsers
+		%noscript
+			%img{:alt => "", :src => article.avatar}/
+	.media-body
+		%header.entry-header
+			%h3.entry-title
+				%a{:href => article.url, :rel => "bookmark"}=article.title
+			.entry-meta
+				%span.author
+					by
+					%a{:href => swell_media.articles_path( by: article.user.slug )}=article.user.full_name
+				%span.entry-date
+					%a{:href => "blog.html"}
+						on
+						%time{:datetime => article.publish_at.to_formatted_s(:iso8601) }=article.publish_at.strftime("%B %e %Y")
+				%span.category
+					In
+					%a{:href => swell_media.category_path(article.category.slug)}=article.category.name
+		%p
+			= article.sanitized_content.truncate(200)
+			%a.more-link{:href => article.url}
+				Continue Reading
+				%i.icon.icon-long-arrow-right

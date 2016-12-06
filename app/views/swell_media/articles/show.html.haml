@@ -1,0 +1,155 @@
+.section.section-no-margin-bottom.row.entries.bg-primary
+	%article.entry.style-grid.style-hero.hero-nav.type-post.col-xs-6.col-sm-6
+		- if ( previous_article = SwellMedia::Article.published.where('publish_at < ?', @media.publish_at).order(publish_at: :desc).first ).present?
+			%a{:href => previous_article.url}
+				%header.entry-header
+					%p.small Previous Story
+					%h3.entry-title=previous_article.title
+				%figure.entry-thumbnail
+					.overlay.overlay-primary
+					/ to disable lazy loading, remove data-src and data-src-retina
+					%img{:alt => "", "data-src" => previous_article.avatar, "data-src-retina" => previous_article.avatar, :height => "280", :src => image_path('app_theme/placeholder.gif'), :width => "480"}/
+					/ fallback for no javascript browsers
+					%noscript
+						%img{:alt => "", :src => previous_article.avatar}/
+	%article.entry.style-grid.style-hero.hero-nav.type-post.col-xs-6.col-sm-6
+		- if ( next_article = SwellMedia::Article.published.where('publish_at > ?', @media.publish_at).order(publish_at: :asc).first ).present?
+			%a{:href => next_article.url}
+				%header.entry-header
+					%p.small Next Story
+					%h3.entry-title=next_article.title
+				%figure.entry-thumbnail
+					.overlay.overlay-primary
+					/ to disable lazy loading, remove data-src and data-src-retina
+					%img{:alt => "", "data-src" => next_article.avatar, "data-src-retina" => next_article.avatar, :height => "280", :src => image_path('app_theme/placeholder.gif'), :width => "480"}/
+					/ fallback for no javascript browsers
+					%noscript
+						%img{:alt => "", :src => next_article.avatar}/
+#content.content.section.row
+	.col-md-8.bg-base.col-lg-8.col-xl-9
+		.ribbon.ribbon-highlight
+			%ol.breadcrumb.ribbon-inner
+				%li
+					%a{:href => swell_media.root_path()} Home
+				%li
+					%a{:href => swell_media.category_path( @media.category.slug ) }=@media.category.name
+				%li.active{:title => @media.title}=@media.title.truncate(32)
+		%header.page-header
+			-# .page-meta.pull-right.hidden-xs
+				%a{:href => "#comments"}
+					%span.comments-count-balloon.bg-primary
+						123
+						%em Comments
+			%h2.page-title
+				= @media.title
+		%article.entry.style-single.type-post
+			- if (@media.cover_path || @media.avatar).present?
+				%figure.entry-thumbnail
+					/ to disable lazy loading, remove data-src and data-src-retina
+					%img{:alt => "", "data-src" => (@media.cover_path || @media.avatar), "data-src-retina" => (@media.cover_path || @media.avatar), :height => "452", :src => image_path('app_theme/placeholder.gif'), :width => "680"}/
+					/ fallback for no javascript browsers
+					%noscript
+						%img{:alt => "", :src => (@media.cover_path || @media.avatar)}/
+			.entry-meta.indented
+				%span.author
+					by
+					%a{:href => swell_media.category_path( :all, user: @media.user.slug) }=@media.user.full_name
+				%span.entry-date
+					on
+					%time{:datetime => "2013-07-04T23:26:34+00:00"}=@media.publish_at.strftime("%B %e %Y")
+				- if @media.category.present?
+					%span.category
+						In
+						%a{:href => swell_media.category_path( @media.category.slug ) }=@media.category.name
+			.entry-content.indented
+				= raw @media.content
+		.after-entry.indented
+			- if @media.tags.present?
+				%hr/
+				%aside.widget.post-tags
+					%i.icon-tags
+					Tags:
+					- @media.tags.each do |tag|
+						%a{:href => swell_media.category_path( :all, tag: tag )}=tag
+			%hr/
+			%aside.widget.widget-author.media
+				%figure.entry-author-avatar.media-object.avatar.pull-left
+					/ to disable lazy loading, remove data-src and data-src-retina
+					%img.img-circle{:alt => @media.user.full_name, "data-src" => @media.user.avatar_url, "data-src-retina" => @media.user.avatar_url, :height => "230", :src => image_path('app_theme/placeholder.gif'), :width => "230"}/
+					/ fallback for no javascript browsers
+					%noscript
+						%img{:alt => "", :src => @media.user.avatar_url}/
+				.media-body
+					%h4.entry-author-name
+						By
+						%a{:href => swell_media.category_path(:all, user: @media.user.slug) }=@media.user.full_name
+					- if @media.user.short_bio.present?
+						%p
+							= @media.user.short_bio
+			- if ( related_articles = SwellMedia::Article.published.where.not(id: @media.id).where(category: @media.category).order(publish_at: :desc).limit(4) ).present?
+				%hr/
+				%aside.widget
+					%h4.widget-title Related Posts
+					.entries.row
+						- related_articles.each do |related_article|
+							%article.entry.type-post.style-thumbnail.col-xs-3.col-sm-3
+								%figure.entry-thumbnail
+									/ to disable lazy loading, remove data-src and data-src-retina
+									%img{:alt => "", "data-src" => related_article.avatar, "data-src-retina" => related_article.avatar, :height => "230", :src => image_path('app_theme/placeholder.gif'), :width => "230"}/
+									/ fallback for no javascript browsers
+									%noscript
+										%img{:alt => "", :src => related_article.avatar}/
+								%h3.entry-title
+									%a{:href => related_article.url}=related_article.title
+						%article.entry.type-post.style-thumbnail.col-xs-3.col-sm-3
+							%figure.entry-thumbnail
+								/ to disable lazy loading, remove data-src and data-src-retina
+								%img{:alt => "", "data-src" => "http://placehold.it/230x230", "data-src-retina" => "http://placehold.it/460x460", :height => "230", :src => image_path('app_theme/placeholder.gif'), :width => "230"}/
+								/ fallback for no javascript browsers
+								%noscript
+									%img{:alt => "", :src => "http://placehold.it/230x230"}/
+							%h3.entry-title
+								%a{:href => "single.html"} Oomnis iste natus error sit voluptatem.
+						%article.entry.type-post.style-thumbnail.col-xs-3.col-sm-3
+							%figure.entry-thumbnail
+								/ to disable lazy loading, remove data-src and data-src-retina
+								%img{:alt => "", "data-src" => "http://placehold.it/230x230", "data-src-retina" => "http://placehold.it/460x460", :height => "230", :src => image_path('app_theme/placeholder.gif'), :width => "230"}/
+								/ fallback for no javascript browsers
+								%noscript
+									%img{:alt => "", :src => "http://placehold.it/230x230"}/
+							%h3.entry-title
+								%a{:href => "single.html"} Temporibus autem quibusdam.
+						%article.entry.type-post.style-thumbnail.col-xs-3.col-sm-3
+							%figure.entry-thumbnail
+								/ to disable lazy loading, remove data-src and data-src-retina
+								%img{:alt => "", "data-src" => "http://placehold.it/230x230", "data-src-retina" => "http://placehold.it/460x460", :height => "230", :src => image_path('app_theme/placeholder.gif'), :width => "230"}/
+								/ fallback for no javascript browsers
+								%noscript
+									%img{:alt => "", :src => "http://placehold.it/230x230"}/
+							%h3.entry-title
+								%a{:href => "single.html"} Siste natus error sit voluptatem.
+			-# %hr/
+			-# %aside.widget
+				Share:
+				%a{:href => "#", :onclick => "window.open(\r\n\t\t\t\t\t\t\t\t'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href), \r\n\t\t\t\t\t\t\t\t'facebook-share-dialog', \r\n\t\t\t\t\t\t\t\t'width=626,height=436'); \r\n\t\t\t\t\t\t\t\treturn false;"}
+					%span.icon-stack
+						%i.icon-sign-blank.icon-stack-base
+						%i.icon-facebook.icon-light
+				%a{:href => "#", :onclick => "window.open(\r\n\t\t\t\t\t\t\t\t'http://twitter.com/home?status='+encodeURIComponent(location.href), \r\n\t\t\t\t\t\t\t\t'facebook-share-dialog', \r\n\t\t\t\t\t\t\t\t'width=626,height=436'); \r\n\t\t\t\t\t\t\t\treturn false;"}
+					%span.icon-stack
+						%i.icon-sign-blank.icon-stack-base
+						%i.icon-twitter.icon-light
+				%a{:href => "#", :onclick => "window.open(\r\n\t\t\t\t\t\t\t\t'https://plus.google.com/share?url='+encodeURIComponent(location.href), \r\n\t\t\t\t\t\t\t\t'facebook-share-dialog', \r\n\t\t\t\t\t\t\t\t'width=500,height=436'); \r\n\t\t\t\t\t\t\t\treturn false;"}
+					%span.icon-stack
+						%i.icon-sign-blank.icon-stack-base
+						%i.icon-google-plus.icon-light
+				%a{:href => "#", :onclick => "javascript:void((function(){var e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','http://assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)})());"}
+					%span.icon-stack
+						%i.icon-sign-blank.icon-stack-base
+						%i.icon-pinterest.icon-light
+		= render 'application/comments'
+	/ /.col-md-8.col-lg-8.col-xl-9
+	.sidebar.col-md-4.col-lg-4.col-xl-3
+		= render 'application/sidebar'
+	/ /.sidebar col-md-4 col-lg-4 col-xl-3
+/ /#content

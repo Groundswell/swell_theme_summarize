@@ -1,0 +1,21 @@
+
+%article.entry.style-large.type-post
+	%figure.entry-thumbnail.hidden-xs
+		%a{ href: article.url }
+			%img{ src: article.avatar }
+	%header.entry-header
+		%h3.entry-title
+			%a{ href: article.url }
+				= article.title
+		.entry-meta
+			%span.author
+				%a{ href: swell_media.category_path( :all, user: article.user.slug) }
+					by #{article.user.full_name}
+			%span.date
+				on #{article.publish_at.strftime("%B %e %Y")}
+			%span.category
+				In
+				%a{ href: swell_media.category_path(article.category.slug) }
+					= article.category.name
+	%p
+		= raw article.description

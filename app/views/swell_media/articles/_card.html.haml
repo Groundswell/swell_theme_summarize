@@ -1,0 +1,11 @@
+
+%article.entry.style-grid.style-hero.type-post{ class: args[:css_class] || 'col-md-4 col-lg-6 colheight-sm-1' }
+	.ribbon.ribbon-pulled.ribbon-small.ribbon-highlight
+		%a{ href: swell_media.category_path(article.category.slug) }
+			= article.category.name
+	%header.entry-header
+		%h3.entry-title
+			= article.title
+	%figure.entry-thumbnail
+		%a.overlay.overlay-primary{ href: article.url }
+			%img{ src: article.avatar, style: 'opacity:0.66' }

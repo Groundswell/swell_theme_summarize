@@ -1,0 +1,209 @@
+- if ( featured_articles = SwellMedia::Article.published.order(publish_at: :desc).limit(4) ).present?
+
+	%aside.widget
+		%h2.widget-title.ribbon
+			%span Featured Posts
+		.entries.row
+			- featured_articles.each do |featured_article|
+				%article.type-post.style-media-list.media.col-sm-6.col-md-12
+					/ to disable lazy loading, remove data-src and data-src-retina
+					%img.media-object.pull-left{:alt => "", "data-src" => featured_article.avatar, "data-src-retina" => featured_article.avatar, :height => "80", :src => image_path('app_theme/placeholder.gif'), :width => "80"}/
+					/ fallback for no javascript browsers
+					%noscript
+						%img{:alt => "", :src => featured_article.avatar}/
+					.media-body
+						%h3.entry-title
+							%a{:href => featured_article.url, :rel => "bookmark"}=featured_article.title
+						.entry-meta
+							%span.entry-date
+								on
+								%time{:datetime => featured_article.publish_at.strftime("%B %e %Y")}=featured_article.publish_at.strftime("%B %e %Y")
+							%span.category
+								In
+								%a{:href => swell_media.category_path(featured_article.category.slug)}=featured_article.category.name
+/ /.widget
+-# %aside#reviewCarousel.widget.carousel.slide
+	%h2.widget-title.ribbon
+		%span Latest Review
+	.carousel-inner
+		.item.active
+			%article.entry.style-grid.style-review.type-post
+				%header.entry-header
+					%h3.entry-title
+						%a{:href => "single.html"} xPhone 5s Review
+					%p.small Excepteur sint occaecat cupidatat non proident
+				.style-review-score
+					81
+				%figure.entry-thumbnail
+					%a.overlay.overlay-primary{:href => "single.html"}
+					/ to disable lazy loading, remove data-src and data-src-retina
+					%img{:alt => "", "data-src" => "http://placehold.it/480x280", "data-src-retina" => "http://placehold.it/720x420", :height => "280", :src => image_path('app_theme/placeholder.gif'), :width => "480"}/
+					/ fallback for no javascript browsers
+					%noscript
+						%img{:alt => "", :src => "http://placehold.it/720x420"}/
+		/ /.item.active
+		.item
+			%article.entry.style-grid.style-review.type-post
+				%header.entry-header
+					%h3.entry-title
+						%a{:href => "single.html"} xPhone 5s Review
+					%p.small Excepteur sint occaecat cupidatat non proident
+				.style-review-score
+					80
+				%figure.entry-thumbnail
+					%a.overlay.overlay-primary{:href => "single.html"}
+					/ to disable lazy loading, remove data-src and data-src-retina
+					%img{:alt => "", "data-src" => "http://placehold.it/480x280", "data-src-retina" => "http://placehold.it/720x420", :height => "280", :src => image_path('app_theme/placeholder.gif'), :width => "480"}/
+					/ fallback for no javascript browsers
+					%noscript
+						%img{:alt => "", :src => "http://placehold.it/720x420"}/
+		/ /.item.active
+	/ /.carousel-inner
+	%a.left.carousel-control{"data-slide" => "prev", :href => "#reviewCarousel"}
+		%span.icon.icon-angle-left
+	%a.right.carousel-control{"data-slide" => "next", :href => "#reviewCarousel"}
+		%span.icon.icon-angle-right
+/ /.widget.carousel
+-# %aside.widget
+	%h2.widget-title.ribbon
+		%span What's Hot
+	.entries.row
+		%article.type-post.style-media-list.media.col-sm-6.col-md-12
+			/ to disable lazy loading, remove data-src and data-src-retina
+			%img.media-object.pull-left{:alt => "", "data-src" => "http://placehold.it/80x80", "data-src-retina" => "http://placehold.it/160x160", :height => "80", :src => image_path('app_theme/placeholder.gif'), :width => "80"}/
+			/ fallback for no javascript browsers
+			%noscript
+				%img{:alt => "", :src => "http://placehold.it/80x80"}/
+			.media-body
+				%h3.entry-title
+					%a{:href => "single.html", :rel => "bookmark"} Ullamco laboris nisi ut aliquip ex ea commodo consequat.
+				.entry-meta
+					%span.entry-date
+						%a{:href => "blog.html"}
+							on
+							%time{:datetime => "2013-07-04T23:26:34+00:00"} September 20 2013
+					%span.category
+						In
+						%a{:href => "blog.html"} Technology
+		%article.type-post.style-media-list.media.col-sm-6.col-md-12
+			/ to disable lazy loading, remove data-src and data-src-retina
+			%img.media-object.pull-left{:alt => "", "data-src" => "http://placehold.it/80x80", "data-src-retina" => "http://placehold.it/160x160", :height => "80", :src => image_path('app_theme/placeholder.gif'), :width => "80"}/
+			/ fallback for no javascript browsers
+			%noscript
+				%img{:alt => "", :src => "http://placehold.it/80x80"}/
+			.media-body
+				%h3.entry-title
+					%a{:href => "single.html", :rel => "bookmark"} Duis aute irure dolor in reprehenderit in voluptate velit esse.
+				.entry-meta
+					%span.entry-date
+						%a{:href => "blog.html"}
+							on
+							%time{:datetime => "2013-07-04T23:26:34+00:00"} September 20 2013
+					%span.category
+						In
+						%a{:href => "blog.html"} Technology
+		%article.type-post.style-media-list.media.col-sm-6.col-md-12
+			/ to disable lazy loading, remove data-src and data-src-retina
+			%img.media-object.pull-left{:alt => "", "data-src" => "http://placehold.it/80x80", "data-src-retina" => "http://placehold.it/160x160", :height => "80", :src => image_path('app_theme/placeholder.gif'), :width => "80"}/
+			/ fallback for no javascript browsers
+			%noscript
+				%img{:alt => "", :src => "http://placehold.it/80x80"}/
+			.media-body
+				%h3.entry-title
+					%a{:href => "single.html", :rel => "bookmark"} Excepteur sint occaecat cupidatat non proident.
+				.entry-meta
+					%span.entry-date
+						%a{:href => "blog.html"}
+							on
+							%time{:datetime => "2013-07-04T23:26:34+00:00"} September 20 2013
+					%span.category
+						In
+						%a{:href => "blog.html"} Technology
+		%article.type-post.style-media-list.media.col-sm-6.col-md-12
+			/ to disable lazy loading, remove data-src and data-src-retina
+			%img.media-object.pull-left{:alt => "", "data-src" => "http://placehold.it/80x80", "data-src-retina" => "http://placehold.it/160x160", :height => "80", :src => image_path('app_theme/placeholder.gif'), :width => "80"}/
+			/ fallback for no javascript browsers
+			%noscript
+				%img{:alt => "", :src => "http://placehold.it/80x80"}/
+			.media-body
+				%h3.entry-title
+					%a{:href => "single.html", :rel => "bookmark"} Ullamco laboris nisi ut aliquip ex ea commodo consequat.
+				.entry-meta
+					%span.entry-date
+						%a{:href => "blog.html"}
+							on
+							%time{:datetime => "2013-07-04T23:26:34+00:00"} September 20 2013
+					%span.category
+						In
+						%a{:href => "blog.html"} Technology
+		%article.type-post.style-media-list.media.col-sm-6.col-md-12
+			/ to disable lazy loading, remove data-src and data-src-retina
+			%img.media-object.pull-left{:alt => "", "data-src" => "http://placehold.it/80x80", "data-src-retina" => "http://placehold.it/160x160", :height => "80", :src => image_path('app_theme/placeholder.gif'), :width => "80"}/
+			/ fallback for no javascript browsers
+			%noscript
+				%img{:alt => "", :src => "http://placehold.it/80x80"}/
+			.media-body
+				%h3.entry-title
+					%a{:href => "single.html", :rel => "bookmark"} Duis aute irure dolor in reprehenderit in voluptate velit esse.
+				.entry-meta
+					%span.entry-date
+						%a{:href => "blog.html"}
+							on
+							%time{:datetime => "2013-07-04T23:26:34+00:00"} September 20 2013
+					%span.category
+						In
+						%a{:href => "blog.html"} Technology
+/ /.widget
+-# %aside.widget
+	%h3.widget-title.ribbon
+		%span Latest Discussion
+	%ul.entries
+		%li.entry.style-recent-list.type-post
+			%span.comments-count-balloon 900
+			%a.entry-title{:href => "single.html", :rel => "bookmark"} Ullamco laboris nisi ut aliquip ex ea commodo consequat.
+		%li.entry.style-recent-list.type-post
+			%span.comments-count-balloon 860
+			%a.entry-title{:href => "single.html", :rel => "bookmark"} Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+		%li.entry.style-recent-list.type-post
+			%span.comments-count-balloon 1234
+			%a.entry-title{:href => "single.html", :rel => "bookmark"} In voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+		%li.entry.style-recent-list.type-post
+			%span.comments-count-balloon 90
+			%a.entry-title{:href => "single.html", :rel => "bookmark"} Duis aute irure dolor in reprehenderit.
+		%li.entry.style-recent-list.type-post
+			%span.comments-count-balloon 8
+			%a.entry-title{:href => "single.html", :rel => "bookmark"} Utempor incididunt ut labore et dolore magna aliqua.
+/ /.widget
+-# %aside.widget
+	%h3.widget-title.ribbon
+		%span Special Coverage
+	%ul.entries.coverageList.aligncenter
+		%li
+			%a{:href => "blog.html"} #xPhone launch event
+		%li
+			%a{:href => "blog.html"} #WCDC 2013
+		%li
+			%a{:href => "blog.html"} #Nokiem bought by Macrosoft
+		%li
+			%a{:href => "blog.html"} #Blueberry JUMP 2013
+		%li
+			%a{:href => "blog.html"} #CONFEST 2013
+		%li
+			%a{:href => "blog.html"} #Ullamco laboris nisi ut.
+		%li
+			%a{:href => "blog.html"} #Eliquip ex ea commodo consequat.
+		%li
+			%a{:href => "blog.html"} #Duis aute irure dolor in.
+		%li
+			%a{:href => "blog.html"} #Reprehenderit in voluptate
+		%li
+			%a{:href => "blog.html"} #Velit esse Ullamco laboris.
+/ /.widget
+%aside.widget
+	%h3.widget-title.ribbon
+		%span Tags
+	.tagcloud
+		- SwellMedia::Article.published.media_tag_cloud( limit: 16 ).each do |tag,count|
+			%a{:href => swell_media.category_path( :all, tag: tag ) }
+				= tag
+/ /.widget
