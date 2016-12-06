@@ -1,0 +1,23 @@
+#content.content.section.row
+	.col-md-8.bg-base.col-lg-8.col-xl-9
+		.ribbon.ribbon-highlight
+			%ol.breadcrumb.ribbon-inner
+				%li
+					%a{:href => swell_media.root_path()} Home
+				- if @category
+					%li.active
+						%a{:href => swell_media.category_path(@category.slug)}=@category.name
+				- else
+					%li.active
+						%a{:href => swell_media.articles_path()} Blog
+
+		.entries
+			- @results.each do |article|
+				= render 'swell_media/articles/row', article: article, args: {}
+		/ /.entris
+		= paginate @results
+	/ /.col-md-8.col-lg-8.col-xl-9
+	.sidebar.col-md-4.col-lg-4.col-xl-3
+		= render 'application/sidebar'
+	/ /.sidebar col-md-4 col-lg-4 col-xl-3
+/ /#content
