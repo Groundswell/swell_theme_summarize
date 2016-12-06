@@ -113,6 +113,30 @@
 				- else
 					%li.active
 						= @title
+
+		- if @author.present?
+			%h1
+				= pluralize @count, 'Article'
+				by
+				= @author
+
+		- elsif @query.present?
+			%h1
+				= pluralize @count, 'Article'
+				matching
+				= "'#{@query}'"
+
+		- elsif @tagged.present?
+			%h1
+				= pluralize @count, 'Article'
+				tagged
+				= "'#{@tagged}'"
+
+		- elsif @category.present?
+			%h1
+				= pluralize @count, 'Article'
+				in
+				= "'#{@category}'"
 		.entries
 			- @articles.each do |article|
 				= render 'swell_media/articles/row', article: article, args: {}
