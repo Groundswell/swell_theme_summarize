@@ -41,8 +41,9 @@
 									.media-body
 										.entry-title
 											= article.title
-										.entry-meta
-											= article.category.name
+										- if article.category.present?
+											.entry-meta
+												= article.category.name
 
 			.bg-base.col-md-8.col-lg-8
 				%h2.section-title.ribbon.ribbon-highlight

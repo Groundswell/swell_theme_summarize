@@ -13,9 +13,10 @@
 					by #{article.user.full_name}
 			%span.date
 				on #{article.publish_at.strftime("%B %e %Y")}
-			%span.category
-				In
-				%a{ href: swell_media.articles_path(category: article.category.slug) }
-					= article.category.name
+			- if article.category.present?
+				%span.category
+					In
+					%a{ href: swell_media.articles_path(category: article.category.slug) }
+						= article.category.name
 	%p
 		= raw article.description

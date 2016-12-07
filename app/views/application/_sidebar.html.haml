@@ -18,9 +18,10 @@
 							%span.entry-date
 								on
 								%time{:datetime => featured_article.publish_at.strftime("%B %e %Y")}=featured_article.publish_at.strftime("%B %e %Y")
-							%span.category
-								In
-								%a{:href => swell_media.articles_path(category: featured_article.category.slug)}=featured_article.category.name
+							- if featured_article.category.present?
+								%span.category
+									In
+									%a{:href => swell_media.articles_path(category: featured_article.category.slug)}=featured_article.category.name
 / /.widget
 -# %aside#reviewCarousel.widget.carousel.slide
 	%h2.widget-title.ribbon

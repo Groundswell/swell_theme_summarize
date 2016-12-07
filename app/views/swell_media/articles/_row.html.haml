@@ -16,9 +16,10 @@
 				%span.entry-date
 					on
 					%time{:datetime => article.publish_at.to_formatted_s(:iso8601) }=article.publish_at.strftime("%B %e %Y")
-				%span.category
-					In
-					%a{:href => swell_media.articles_path(category: article.category.slug)}=article.category.name
+				- if article.category.present?
+					%span.category
+						In
+						%a{:href => swell_media.articles_path(category: article.category.slug)}=article.category.name
 		%p
 			= article.sanitized_content.truncate(200)
 			%a.more-link{:href => article.url}

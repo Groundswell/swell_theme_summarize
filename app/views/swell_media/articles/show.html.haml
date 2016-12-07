@@ -33,8 +33,9 @@
 					%a{:href => swell_media.root_path()} Home
 				%li
 					%a{:href => swell_media.articles_path() } Blog
-				%li.active
-					%a{:href => swell_media.articles_path(category: @media.category.slug ) }=@media.category.name
+				- if @media.category.present?
+					%li.active
+						%a{:href => swell_media.articles_path(category: @media.category.slug ) }=@media.category.name
 				-# %li.active{:title => @media.title}=@media.title.truncate(32)
 		%header.page-header
 			-# .page-meta.pull-right.hidden-xs
@@ -88,7 +89,7 @@
 					- if @media.user.short_bio.present?
 						%p
 							= @media.user.short_bio
-			- if ( related_articles = SwellMedia::Article.published.where.not(id: @media.id).where(category: @media.category).order(publish_at: :desc).limit(4) ).present?
+			- if @media.category.present? && ( related_articles = SwellMedia::Article.published.where.not(id: @media.id).where(category: @media.category).order(publish_at: :desc).limit(4) ).present?
 				%hr/
 				%aside.widget
 					%h4.widget-title Related Posts
