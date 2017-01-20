@@ -11,12 +11,9 @@
  * file per style scope.
  *
  *= require app_theme/summarize/vendor/bootstrap.min.css
- *= require app_theme/summarize/vendor/bootstrap-theme.min
  *= require app_theme/summarize/vendor/prettyPhoto
- *= require app_theme/summarize/vendor/reset
- *= require app_theme/summarize/components
- *= require app_theme/summarize/libs
  *= require app_theme/summarize/base
+ *= require app_theme/summarize/components
  *= require app_theme/summarize/colors
 
  *= require_self
