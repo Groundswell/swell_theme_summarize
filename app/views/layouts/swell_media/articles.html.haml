@@ -5,6 +5,7 @@
 //[if gt IE 8] <html class="no-js">
 %html{ lang: :en }
 	%head
+		= render 'application/goog_tag'
 		= render 'application/html_head', args: {}
 
 		= stylesheet_link_tag "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"
@@ -13,7 +14,7 @@
 
 		%link{ href: "http://fonts.googleapis.com/css?family=Droid+Sans:400,700|Lato:300,400,700,400italic,700italic|Droid+Serif", rel: "stylesheet", type: "text/css" }
 
-		= stylesheet_link_tag "application", media: "all"
+		= stylesheet_link_tag "app_theme", media: "all"
 		
 	%body
 		= render 'application/analytics'
