@@ -74,10 +74,15 @@
 								%a{:href => "http://cloud.feedly.com/#subscription%2Ffeed%2F#{CGI.escape( swell_media.articles_url( format: 'rss' ) )}", :target => "blank" }
 									%img#feedlyFollow{:alt => "follow us in feedly", :src => "http://s3.feedly.com/img/follows/feedly-follow-logo-black_2x.png", style: 'height: 1.25em;vertical-align: text-top;opacity: 0.4;'}
 									Feedly
+				
 			/ /.col-3
 		/ row.
 	.footer-bottom
 		.container.aligncenter
+			%hr
+			%p.small
+				= SwellMedia.app_name
+				is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for us to earn fees by linking to Amazon.com and affiliated sites.
 			%p
 				©
 				= Time.now.year
